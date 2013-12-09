@@ -13,7 +13,7 @@ busybox mount -t ext4 /dev/block/mmcblk0p3 /cache
 
 image=/stage1/boot.cpio
 
-if busybox test -e /cache/.startrecovery || [ `busybox cat /proc/cmdline | busybox grep bootmode | busybox awk '{print $2}'` == bootmode=2 ] ; then
+if busybox test -e /cache/.startrecovery || grep -q bootmode=2 /proc/cmdline ; then
 	# recovery boot
 	busybox rm -fr /cache/.startrecovery
 	image=/stage1/recovery.cpio
